@@ -20,22 +20,6 @@
     });
   }
 
-  /* Masaüstü alt menü (Hakkımızda ▾) */
-  document.querySelectorAll(".has-sub").forEach(function (item) {
-    var btn = item.querySelector("button");
-    if (!btn) return;
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var open = item.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    document.addEventListener("click", function (e) {
-      if (!item.contains(e.target)) { item.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
-    });
-    item.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { item.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.focus(); }
-    });
-  });
 
   /* Footer yılı */
   document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });

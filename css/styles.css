@@ -130,8 +130,10 @@ ul, ol { padding-left: 1.2em; }
 .has-sub > button.is-active { color: var(--teal-700); background: var(--teal-50); }
 .has-sub > button svg { width: 14px; height: 14px; transition: transform .2s; }
 .has-sub.open > button svg { transform: rotate(180deg); }
-.submenu { position: absolute; top: calc(100% + 8px); right: 0; min-width: 220px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-lg); padding: .5rem; display: none; flex-direction: column; }
-.has-sub.open .submenu { display: flex; }
+.submenu { position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow-lg); padding: .5rem; display: none; flex-direction: column; z-index: 120; }
+.has-sub:hover > .submenu,
+.has-sub:focus-within > .submenu,
+.has-sub.open > .submenu { display: flex; }
 .submenu a { padding: .6rem .8rem; }
 .submenu a[aria-current="page"]::after { display: none; }
 
@@ -143,7 +145,11 @@ ul, ol { padding-left: 1.2em; }
   .main-nav a { padding: .8rem 1rem; font-size: 1rem; }
   .main-nav a[aria-current="page"]::after { left: 0; right: auto; top: .6rem; bottom: .6rem; width: 4px; height: auto; }
   .has-sub > button { display: none; }
-  .submenu { position: static; display: flex; box-shadow: none; border: 0; padding: 0; min-width: 0; }
+  /* Mobilde alt menü yalnızca hamburger açıkken, düz liste olarak */
+  .has-sub:hover > .submenu,
+  .has-sub:focus-within > .submenu,
+  .has-sub.open > .submenu { display: none; }
+  .main-nav.open .submenu { position: static; display: flex; box-shadow: none; border: 0; padding: 0 0 0 .5rem; min-width: 0; }
   .header-cta .btn-label-long { display: none; }
 }
 @media (max-width: 640px) {
@@ -177,12 +183,13 @@ ul, ol { padding-left: 1.2em; }
 
 /* ---------- Ana sayfa hero ---------- */
 .hero { position: relative; overflow: hidden; background: radial-gradient(1200px 500px at 85% -10%, rgba(70,191,185,.25), transparent 60%), radial-gradient(700px 400px at -10% 110%, rgba(253,191,14,.18), transparent 60%), #fff; }
-.hero .container { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.hero .container { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; padding-block: clamp(2.8rem, 6vw, 5rem); }
 .hero h1 { font-size: clamp(2.3rem, 5.2vw, 3.9rem); }
 .hero h1 em { font-style: normal; color: var(--teal-700); background: linear-gradient(transparent 62%, rgba(253,191,14,.45) 62%); padding: 0 .1em; }
 .hero .lead { font-size: 1.22rem; margin-bottom: 2rem; }
 .hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
-.hero-note { margin-top: 1.6rem; font-size: .9rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; }
+.hero-note { margin-top: 1.6rem; font-size: .9rem; color: var(--muted); display: flex; align-items: center; gap: .5rem; max-width: 36rem; }
+.hero-note svg { width: 18px; height: 18px; flex-shrink: 0; }
 .hero-visual { position: relative; aspect-ratio: 1 / 1; max-width: 480px; justify-self: center; width: 100%; }
 .hero-visual .blob { position: absolute; border-radius: 50%; }
 .hero-visual .b1 { inset: 6% 10% 14% 4%; background: linear-gradient(140deg, var(--teal), var(--teal-700)); border-radius: 46% 54% 42% 58% / 52% 44% 56% 48%; box-shadow: var(--shadow-lg); }
